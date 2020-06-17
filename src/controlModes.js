@@ -1,2 +1,5 @@
 export const DEFAULT = 'DEFAULT'
 export const CREATE = 'CREATE'
+export const SHOW = 'SHOW'
+export const RATE_CLEAN = 'RATE_CLEAN'
+export const RATE_LOCK = 'RATE_LOCK'

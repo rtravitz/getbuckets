@@ -10,6 +10,7 @@ function App() {
   const [buckets, setBuckets] = useState([])
   const [newBucket, setNewBucket] = useState(null)
   const [controlMode, setControlMode] = useState(DEFAULT)
+  const [currentBucket, setCurrentBucket] = useState(null)
   const refMarker = useRef(null)
 
   useEffect(() => {
@@ -24,11 +25,14 @@ function App() {
         controlMode={controlMode}
         center={[47.617396, -122.310563]}
         setNewBucket={setNewBucket}
+        setControlMode={setControlMode}
+        setCurrentBucket={setCurrentBucket}
         buckets={buckets} />
       <Controls
         newBucket={newBucket}
         setNewBucket={setNewBucket}
         setBuckets={setBuckets}
+        currentBucket={currentBucket}
         controlMode={controlMode}
         setControlMode={setControlMode} />
     </>

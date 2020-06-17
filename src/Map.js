@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Map as LeafletMap, Marker, TileLayer } from 'react-leaflet'
-import { CREATE } from './controlModes'
+import { CREATE, SHOW } from './controlModes'
 
-function Map({ buckets, center, controlMode, refMarker, setNewBucket }) {
+function Map({ buckets, center, controlMode, refMarker, setNewBucket, setCurrentBucket, setControlMode }) {
   const [markerCenter, setMarkerCenter] = useState(center)
 
   const updatePosition = () => {
@@ -11,6 +11,13 @@ function Map({ buckets, center, controlMode, refMarker, setNewBucket }) {
       const latLng = marker.leafletElement.getLatLng()
       setNewBucket(latLng)
       setMarkerCenter(latLng)
+    }
+  }
+
+  const markerClick = (bucket) => {
+    return () => {
+      setCurrentBucket(bucket)
+      setControlMode(SHOW)
     }
   }
 
@@ -31,7 +38,10 @@ function Map({ buckets, center, controlMode, refMarker, setNewBucket }) {
         }
         {
           buckets.map((bucket) => (
-            <Marker key={bucket.id} position={[bucket.lat, bucket.lng]} />
+            <Marker 
+              key={bucket.id} 
+              position={[bucket.lat, bucket.lng]} 
+              onClick={markerClick(bucket)} />
           ))
         }
       </LeafletMap>
