@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Map as LeafletMap, Marker, TileLayer } from 'react-leaflet'
-import { CREATE, SHOW } from './controlModes'
+import { CREATE, SHOW } from '../controlModes'
 
 function Map({ buckets, center, controlMode, refMarker, setNewBucket, setCurrentBucket, setControlMode }) {
   const [markerCenter, setMarkerCenter] = useState(center)

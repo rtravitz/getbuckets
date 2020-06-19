@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { DEFAULT } from './controlModes'
+import { DEFAULT } from '../../controlModes'
+import styles from './CreatingView.module.css'
 
 function CreatingView({ newBucket, setNewBucket, setControlMode, setBuckets }) {
   const [errMessage, setErrMessage] = useState(null)
@@ -20,10 +21,14 @@ function CreatingView({ newBucket, setNewBucket, setControlMode, setBuckets }) {
   }
 
   return (
-    <div>
-      <p>Drag the pin to the location where you found the bucket!</p>
+    <div className={styles.container}>
+      <p>Drag the new pin to the location where you found the bucket!</p>
       {errMessage && <p>{errMessage}</p>}
-      <button onClick={() => { saveNewBucket(newBucket) }}>Save</button>
+      <button
+        className={styles.button}
+        onClick={() => { saveNewBucket(newBucket) }}>
+          Save
+      </button>
     </div>
   )
 }

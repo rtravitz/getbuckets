@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import Map from './Map'
-import Controls from './Controls'
+import Map from './map/Map'
+import Controls from './controls/Controls'
 import { DEFAULT } from './controlModes'
 
 import './App.css'

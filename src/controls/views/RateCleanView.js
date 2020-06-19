@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-import { SHOW } from './controlModes'
+import { SHOW } from '../../controlModes'
 
 const RATING = 'RATING'
 const SENDING = 'SENDING'

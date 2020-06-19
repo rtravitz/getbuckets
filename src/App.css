@@ -44,52 +44,17 @@ table {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* =============================== */
+
 .leaflet-container {
   height: 100vh;
   width: 100%;
-}
-
-.controls {
-  border-radius: 10px 10px 0px 0px;
-  height: 3rem;
-  background-color: #f2f2f2;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 -9px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding-top: 1.5rem;
-}
-
-.controls-full {
-  height: 10rem;
-  transition: .5s;
-}
-
-.controls-header {
-  margin: 0;
-  padding: .5rem 1rem;
-  position: absolute;
-  top: 0px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgb(43, 68, 174);
-  border-radius: 10px;
-  font-size: 1.5em;
-  color: white;
-  box-shadow: 0 -9px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.controls-topline {
-  display: flex;
-  justify-content: space-between;
-  padding: .2em 1em;
 }
 

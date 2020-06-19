@@ -1,5 +1,5 @@
 import React from 'react'
-import { RATE_CLEAN, RATE_LOCK } from './controlModes'
+import { RATE_CLEAN, RATE_LOCK } from '../../controlModes'
 
 function ShowBucketView({ bucket, setControlMode }) {
   const createdStr = new Date(bucket.created_at).toLocaleDateString()
