@@ -1,0 +1,47 @@
+.rateIcon {
+  fill: white;
+}
+
+.rateIconGood {
+  background-color: #48BB78;
+}
+
+.rateIconBad {
+  background-color: #F56565;
+}
+
+.rateIconBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .5em;
+  border-radius: 10px;
+  margin-right: .1em;
+}
+
+.subtext {
+  color: #718096;
+  font-size: .8em;
+}
+
+.numRatingText {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.lockScore {
+  display: flex;
+}
+
+.lockScore h3 {
+  font-size: 2.5em;
+}
+
+.ratingBlock {
+  border: solid 1px green;
+  width: 50%;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+}
+

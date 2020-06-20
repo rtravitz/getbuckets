@@ -26,9 +26,7 @@ function CreatingView({ newBucket, setNewBucket, setControlMode, setBuckets }) {
       {errMessage && <p>{errMessage}</p>}
       <button
         className={styles.button}
-        onClick={() => { saveNewBucket(newBucket) }}>
-          Save
-      </button>
+        onClick={() => { saveNewBucket(newBucket) }}>Save</button>
     </div>
   )
 }

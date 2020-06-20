@@ -5,10 +5,11 @@ import RateCleanView from './views/RateCleanView'
 import RateLockView from './views/RateLockView'
 import { CREATE, DEFAULT, SHOW, RATE_CLEAN, RATE_LOCK } from '../controlModes'
 import { InfoIcon, CirclePlusIcon } from '../Icons'
-import * as styles from './Controls.module.css'
+import styles from './Controls.module.css'
 
 function Controls(props) {
   const showFullControls = props.controlMode === DEFAULT ? '' : styles.sectionFullsize
+
   let controlView
   switch (props.controlMode) {
     case CREATE:
