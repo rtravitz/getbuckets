@@ -5,12 +5,9 @@ import CleanBlock from '../CleanBlock'
 import styles from './ShowBucketView.module.css'
 
 function ShowBucketView({ bucket, setControlMode }) {
-  const createdStr = new Date(bucket.created_at).toLocaleDateString()
-
   return (
     <div>
       <div className={styles.topline}>
-        <p>Added on {createdStr}</p>
         <p>Tap the scores to add your rating.</p>
       </div>
       <div className={styles.blockRow}>

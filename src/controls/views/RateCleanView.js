@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import styles from './RateCleanView.module.css'
+import { HappyIcon, SadIcon } from '../../Icons'
+import Loader from '../../Loader'
 
 import { SHOW } from '../../controlModes'
 
@@ -19,34 +22,52 @@ function RateCleanView({ bucketID, setControlMode }) {
       })
       if (res.status === 201) {
         setStatus(SUCCESS)
-        setTimeout(() => { setControlMode(SHOW) }, 1500)
+        setControlMode(SHOW)
       }
     } catch (err) {
       console.log(err)
     }
   }
 
+  const optionCheck = (val) => {
+    if (val === rating) {
+      return `${styles.option} ${styles.selected}`
+    }
+
+    return styles.option
+  }
+
+  const buttonText = status === RATING ? 'Save' : <Loader />
+
   return (
     <div>
-      {
-        status === RATING &&
-        <form onSubmit={submitRating}>
-          <select value={rating} onChange={(e) => { setRating(e.target.value) }}>
-            <option value="1">Terrible</option>
-            <option value="2">Bad</option>
-            <option value="3">Meh</option>
-            <option value="4">Clean</option>
-            <option value="5">Pristine</option>
-          </select>
-
-          <input type="submit" value="Submit" />
-        </form>
-      }
-      {
-        status !== RATING &&
-        <h3>{status}</h3>
-      }
-      <button onClick={() => setControlMode(SHOW)}>Back</button>
+      <div className={styles.optionContainer}>
+        <SadIcon size="24" />
+        <div 
+          className={optionCheck(1)}
+          onClick={() => { setRating(1) }}>1</div>
+        <div 
+          className={optionCheck(2)}
+          onClick={() => { setRating(2) }}>2</div>
+        <div 
+          className={optionCheck(3)}
+          onClick={() => { setRating(3) }}>3</div>
+        <div 
+          className={optionCheck(4)}
+          onClick={() => { setRating(4) }}>4</div>
+        <div 
+          className={optionCheck(5)}
+          onClick={() => { setRating(5) }}>5</div>
+        <HappyIcon size="24" />
+      </div>
+      <div className={styles.btnRow}>
+        <button 
+          className={styles.backBtn}
+          onClick={() => setControlMode(SHOW)}>Back</button>
+        <div 
+          className={styles.submitBtn} 
+          onClick={submitRating}>{buttonText}</div>
+      </div>
     </div>
   )
 }

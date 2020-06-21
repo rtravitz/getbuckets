@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 import { SHOW } from '../../controlModes'
+import LockedToggle from '../../LockedToggle'
 
 const RATING = 'RATING'
 const SENDING = 'SENDING'
@@ -30,6 +31,7 @@ function RateLockView({ setControlMode, bucketID }) {
 
   return (
     <div>
+      <LockedToggle />
       {
         status === RATING &&
         <form onSubmit={submitRating}>

@@ -1,0 +1,59 @@
+.optionContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.option {
+  font-size: 1em;
+  font-weight: 700;
+  background-color: #CBD5E0;
+  padding: 1em;
+  border-radius: 20px;
+}
+
+.selected {
+  color: #EBFBFF;
+  background-color: #00C5FF;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.submitBtn {
+  font-size: 1em;
+  font-weight: 700;
+  margin-top: 1em;
+  border: none;
+  border-radius: 20px;
+  background-color: #00C5FF;
+  color: #EBFBFF;
+  width: 7em;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.backBtn {
+  font-size: 1em;
+  font-weight: 700;
+  margin-top: 1em;
+  border: none;
+  border-radius: 20px;
+  background-color: #A0AEC0;
+  color: #EBFBFF;
+  width: 7em;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.btnRow {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+

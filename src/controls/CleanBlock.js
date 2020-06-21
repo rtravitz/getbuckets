@@ -28,7 +28,7 @@ function CleanBlock({rating, numRatings, onClick}) {
         <div className={styles.lockScore}>
           {icon}
           <div>
-            <h3>{rating}</h3>
+            <h3>{rating.toFixed(2)}</h3>
             <p className={styles.subtext}>cleanliness</p>
           </div>
         </div>
