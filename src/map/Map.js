@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Map as LeafletMap, Marker, TileLayer } from 'react-leaflet'
 import { CREATE, SHOW } from '../controlModes'
+import { redBucketMarker, blueBucketMarker } from './Marker'
 
 function Map({ buckets, center, controlMode, refMarker, setNewBucket, setCurrentBucket, setControlMode }) {
   const [markerCenter, setMarkerCenter] = useState(center)
@@ -30,6 +31,7 @@ function Map({ buckets, center, controlMode, refMarker, setNewBucket, setCurrent
         {
           controlMode === CREATE &&
           <Marker
+            icon={redBucketMarker}
             position={markerCenter}
             ref={refMarker}
             draggable={true}
@@ -40,6 +42,7 @@ function Map({ buckets, center, controlMode, refMarker, setNewBucket, setCurrent
           buckets.map((bucket) => (
             <Marker 
               key={bucket.id} 
+              icon={blueBucketMarker}
               position={[bucket.lat, bucket.lng]} 
               onClick={markerClick(bucket)} />
           ))
