@@ -1,156 +1,66 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ /* The switch - the box around the slider */
 .switch {
-  height: 40px;
-  display: block;
   position: relative;
-  cursor: pointer;
+  display: inline-block;
+  width: 90px;
+  height: 44px;
+  margin: 0 .5em;
 }
 
+/* Hide default HTML checkbox */
 .switch input {
-  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.switch input + span {
-  padding-left: 50px;
-  min-height: 40px;
-  line-height: 40px;
-  display: block;
-  color: #99A3BA;
-  position: relative;
-  white-space: nowrap;
-  transition: color .3s ease;
-}
-
-.switch input + span:before, .switch input + span:after {
-  content: '';
-  display: block;
+/* The slider */
+.slider {
   position: absolute;
-  border-radius: 12px;
-}
-
-.switch input + span:before {
+  cursor: pointer;
   top: 0;
   left: 0;
-  width: 60px;
-  height: 40px;
-  background: #E4ECFA;
-  transition: all .3s ease;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
 }
 
-.switch input + span:after {
-  width: 18px;
-  height: 34px;
-  background: #fff;
-  top: 3px;
-  left: 3px;
-  box-shadow: 0 1px 3px rgba(18, 22, 33, 0.1);
-  transition: all .45s ease;
-}
-
-.switch input + span em {
-  width: 8px;
-  height: 7px;
-  background: #99A3BA;
+.slider:before {
   position: absolute;
-  left: 8px;
-  bottom: 7px;
-  border-radius: 2px;
-  display: block;
-  z-index: 1;
-  transition: all .45s ease;
+  content: "";
+  height: 36px;
+  width: 36px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
 }
 
-.switch input + span em:before {
-  content: '';
-  width: 2px;
-  height: 2px;
-  border-radius: 1px;
-  background: #fff;
-  position: absolute;
-  display: block;
-  left: 50%;
-  top: 50%;
-  margin: -1px 0 0 -1px;
+input:checked + .slider {
+  background-color: #00C5FF;
 }
 
-.switch input + span em:after {
-  content: '';
-  display: block;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border: 1px solid #99A3BA;
-  border-bottom: 0;
-  width: 6px;
-  height: 4px;
-  left: 1px;
-  bottom: 6px;
-  position: absolute;
-  z-index: 1;
-  transform-origin: 0 100%;
-  transition: all .45s ease;
-  transform: rotate(-35deg) translate(0, 1px);
+input:focus + .slider {
+  box-shadow: 0 0 1px #00C5FF;
 }
 
-.switch input + span strong {
-  font-weight: normal;
-  position: relative;
-  display: block;
-  top: 1px;
+input:checked + .slider:before {
+  transform: translateX(46px);
 }
 
-.switch input + span strong:before, .switch input + span strong:after {
-  font-size: 14px;
-  font-weight: 500;
-  display: block;
-  font-family: 'Mukta Malar', Arial;
-  backface-visibility: hidden;
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
 }
 
-.switch input + span strong:before {
-  content: 'Unlocked';
-  transition: all .3s ease .2s;
-}
-
-.switch input + span strong:after {
-  content: 'Locked';
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #5628EE;
-  transition: all .3s ease;
-  transform: translate(2px, 0);
-}
-
-.switch input:checked + span:before {
-  background: rgba(86, 40, 238, 0.35);
-}
-
-.switch input:checked + span:after {
-  background: #fff;
-  transform: translate(18px, 0);
-}
-
-.switch input:checked + span em {
-  transform: translate(18px, 0);
-  background: #5628EE;
-}
-.switch input:checked + span em:after {
-  border-color: #5628EE;
-  transform: rotate(0deg) translate(0, 0);
-}
-
-.switch input:checked + span strong:before {
-  opacity: 0;
-  visibility: hidden;
-  transition: all .3s ease;
-  transform: translate(-2px, 0);
-}
-
-.switch input:checked + span strong:after {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(0, 0);
-  transition: all .3s ease .2s;
+.slider.round:before {
+  border-radius: 50%;
 }
 

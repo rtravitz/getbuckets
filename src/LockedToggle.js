@@ -1,16 +1,17 @@
 import React from 'react'
+
+import { LockClosedIcon, LockOpenIcon } from './Icons'
 import styles from './LockedToggle.module.css'
 
-function LockedToggle() {
+function LockedToggle({ onClick }) {
   return (
-    <div>
+    <div className={styles.container}>
+      <LockClosedIcon size="30px" />
       <label className={styles.switch}>
         <input type="checkbox" />
-        <span>
-          <em></em>
-          <strong></strong>
-        </span>
+        <span onClick={onClick}  className={`${styles.slider} ${styles.round}`}></span>
       </label>
+      <LockOpenIcon size="30px" />
     </div>
   )
 }

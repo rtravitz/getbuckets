@@ -3,13 +3,15 @@ import axios from 'axios'
 
 import { SHOW } from '../../controlModes'
 import LockedToggle from '../../LockedToggle'
+import Loader from '../../Loader'
+import styles from './RateLockView.module.css'
 
 const RATING = 'RATING'
 const SENDING = 'SENDING'
 const SUCCESS = 'SUCCESS'
 
-const LOCKED = 'LOCKED'
-const OPEN = 'OPEN'
+const LOCKED = 'Locked'
+const OPEN = 'Open'
 
 function RateLockView({ setControlMode, bucketID }) {
   const [selectedOption, setSelectedOption] = useState(LOCKED)
@@ -19,52 +21,45 @@ function RateLockView({ setControlMode, bucketID }) {
     try {
       setStatus(SENDING)
       const locked = selectedOption === LOCKED
-      const res = await axios.post(`http://localhost:5000/api/v0/buckets/${bucketID}/ratings`, { locked, })
+      const res = await axios.post(`http://localhost:5000/api/v0/buckets/${bucketID}/ratings`, { locked })
       if (res.status === 201) {
         setStatus(SUCCESS)
-        setTimeout(() => { setControlMode(SHOW) }, 1500)
+        setControlMode(SHOW)
       }
     } catch (err) {
       console.log(err)
     }
   }
 
+  const toggleOption = () => {
+    if (selectedOption === LOCKED) {
+      console.log('togglin')
+      setSelectedOption(OPEN)
+    } else {
+      setSelectedOption(LOCKED)
+    }
+  }
+
+  const buttonText = status === RATING ? 'Save' : <Loader />
+
+  console.log(selectedOption)
+
   return (
     <div>
-      <LockedToggle />
-      {
-        status === RATING &&
-        <form onSubmit={submitRating}>
-          <div className="radio">
-            <label>
-              <input
-                type="radio"
-                value={LOCKED}
-                onChange={() => setSelectedOption(LOCKED)}
-                checked={selectedOption === LOCKED} />
-            Locked
-          </label>
-          </div>
-          <div className="radio">
-            <label>
-              <input
-                type="radio"
-                value={OPEN}
-                onChange={() => setSelectedOption(OPEN)}
-                checked={selectedOption === OPEN} />
-            Open
-          </label>
-          </div>
-          <input type="submit" value="Submit" />
-        </form>
-      }
-      {
-        status !== RATING &&
-        <h3>{status}</h3>
-      }
-      <button onClick={() => setControlMode(SHOW)}>Back</button>
+      <div className={styles.container}>
+        <LockedToggle onClick={toggleOption} />
+      </div>
+      <div className={styles.btnRow}>
+        <button 
+          className={styles.backBtn}
+          onClick={() => setControlMode(SHOW)}>Back</button>
+        <div 
+          className={styles.submitBtn} 
+          onClick={submitRating}>{buttonText}</div>
+      </div>
     </div>
   )
 }
 
 export default RateLockView
+
