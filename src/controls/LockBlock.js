@@ -36,7 +36,7 @@ function LockBlock({ rating, numRatings, onClick }) {
       </>
     )
   } else {
-    lockedPercentBlock = <p>No ratings yet</p>
+    lockedPercentBlock = <p>No locked ratings yet. Tap to add yours!</p>
   }
 
   return (

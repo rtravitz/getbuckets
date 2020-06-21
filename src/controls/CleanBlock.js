@@ -1,23 +1,49 @@
 import React from 'react'
+import { HappyIcon, SadIcon } from '../Icons'
 import styles from './RatingBlock.module.css'
 
 function CleanBlock({rating, numRatings, onClick}) {
-  let cleanRating
+  let cleanRatingBlock
   if (numRatings > 0) {
-    cleanRating = (
+
+    let icon
+    if (rating > 2.5) {
+      icon = (
+        <HappyIcon
+          size="30"
+          blockClass={`${styles.rateIconBlock} ${styles.rateIconGood}`}
+          svgClass={styles.rateIcon} />
+      )
+    } else {
+      icon = (
+        <SadIcon
+          size="30" 
+          blockClass={`${styles.rateIconBlock} ${styles.rateIconBad}`}
+          svgClass={styles.rateIcon} />
+      )
+    }
+
+    cleanRatingBlock = (
       <>
-        <h3>{rating}</h3>
-        <p>cleanliness</p>
-        <span>based on {numRatings} ratings</span>
+        <div className={styles.lockScore}>
+          {icon}
+          <div>
+            <h3>{rating}</h3>
+            <p className={styles.subtext}>cleanliness</p>
+          </div>
+        </div>
+        <p className={`${styles.subtext} ${styles.numRatingText}`}>Based on {numRatings} ratings</p>
       </>
     )
   } else {
-    cleanRating = <p>No ratings yet</p>
+    cleanRatingBlock = <p>No cleanliness ratings yet. Tap to add yours!</p>
   }
   
   return (
     <div onClick={onClick} className={styles.ratingBlock}>
-      {cleanRating}
+      <div>
+        {cleanRatingBlock}
+      </div>
     </div>
   )
 }
