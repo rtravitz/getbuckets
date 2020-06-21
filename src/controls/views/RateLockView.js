@@ -21,9 +21,9 @@ function RateLockView({ setControlMode, bucketID, updateBucket }) {
     try {
       setStatus(SENDING)
       const locked = selectedOption === LOCKED
-      const res = await axios.post(`http://localhost:5000/api/v0/buckets/${bucketID}/lock`, { locked })
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/v0/buckets/${bucketID}/lock`, { locked })
       if (res.status === 201) {
-        const res = await axios.get(`http://localhost:5000/api/v0/buckets/${bucketID}`)
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND}/api/v0/buckets/${bucketID}`)
         updateBucket(res.data)
         setStatus(SUCCESS)
         setControlMode(SHOW)

@@ -8,7 +8,7 @@ function CreatingView({ newBucket, setNewBucket, setControlMode, setBuckets }) {
 
   const saveNewBucket = async (newBucket) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/v0/buckets', {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/v0/buckets`, {
         lat: newBucket.lat,
         lng: newBucket.lng,
       })

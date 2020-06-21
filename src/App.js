@@ -21,7 +21,7 @@ function App() {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v0/buckets')
+    axios.get(`${process.env.REACT_APP_BACKEND}/api/v0/buckets`)
       .then((res) => { setBuckets(res.data) })
   }, [])
 
