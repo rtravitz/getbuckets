@@ -22,23 +22,28 @@ function Controls(props) {
       )
       break
     case SHOW:
-      controlView = (
-        <ShowBucketView
-          bucket={props.currentBucket}
-          setControlMode={props.setControlMode} />
-      )
+      const currentBucket = props.buckets.find(b => b.id === props.currentBucketID)
+      if (currentBucket) {
+        controlView = (
+          <ShowBucketView
+            bucket={currentBucket}
+            setControlMode={props.setControlMode} />
+        )
+      }
       break
     case RATE_CLEAN:
       controlView = (
         <RateCleanView
-          bucketID={props.currentBucket.id}
+          bucketID={props.currentBucketID}
+          updateBucket={props.updateBucket}
           setControlMode={props.setControlMode} />
       )
       break
     case RATE_LOCK:
       controlView = (
         <RateLockView
-          bucketID={props.currentBucket.id}
+          bucketID={props.currentBucketID}
+          updateBucket={props.updateBucket}
           setControlMode={props.setControlMode} />
       )
       break

@@ -10,8 +10,15 @@ function App() {
   const [buckets, setBuckets] = useState([])
   const [newBucket, setNewBucket] = useState(null)
   const [controlMode, setControlMode] = useState(DEFAULT)
-  const [currentBucket, setCurrentBucket] = useState(null)
+  const [currentBucketID, setCurrentBucketID] = useState(null)
   const refMarker = useRef(null)
+
+  const updateBucket = (fresh) => {
+    const existing = [...buckets]
+    const idx = existing.findIndex(b => b.id === fresh.id)
+    existing[idx] = fresh
+    setBuckets(existing)
+  }
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/v0/buckets')
@@ -26,13 +33,15 @@ function App() {
         center={[47.617396, -122.310563]}
         setNewBucket={setNewBucket}
         setControlMode={setControlMode}
-        setCurrentBucket={setCurrentBucket}
+        setCurrentBucketID={setCurrentBucketID}
         buckets={buckets} />
       <Controls
         newBucket={newBucket}
         setNewBucket={setNewBucket}
+        buckets={buckets}
         setBuckets={setBuckets}
-        currentBucket={currentBucket}
+        updateBucket={updateBucket}
+        currentBucketID={currentBucketID}
         controlMode={controlMode}
         setControlMode={setControlMode} />
     </>

@@ -13,7 +13,7 @@ const SUCCESS = 'SUCCESS'
 const LOCKED = 'Locked'
 const OPEN = 'Open'
 
-function RateLockView({ setControlMode, bucketID }) {
+function RateLockView({ setControlMode, bucketID, updateBucket }) {
   const [selectedOption, setSelectedOption] = useState(LOCKED)
   const [status, setStatus] = useState(RATING)
 
@@ -21,8 +21,10 @@ function RateLockView({ setControlMode, bucketID }) {
     try {
       setStatus(SENDING)
       const locked = selectedOption === LOCKED
-      const res = await axios.post(`http://localhost:5000/api/v0/buckets/${bucketID}/ratings`, { locked })
+      const res = await axios.post(`http://localhost:5000/api/v0/buckets/${bucketID}/lock`, { locked })
       if (res.status === 201) {
+        const res = await axios.get(`http://localhost:5000/api/v0/buckets/${bucketID}`)
+        updateBucket(res.data)
         setStatus(SUCCESS)
         setControlMode(SHOW)
       }
@@ -33,7 +35,6 @@ function RateLockView({ setControlMode, bucketID }) {
 
   const toggleOption = () => {
     if (selectedOption === LOCKED) {
-      console.log('togglin')
       setSelectedOption(OPEN)
     } else {
       setSelectedOption(LOCKED)
@@ -41,8 +42,6 @@ function RateLockView({ setControlMode, bucketID }) {
   }
 
   const buttonText = status === RATING ? 'Save' : <Loader />
-
-  console.log(selectedOption)
 
   return (
     <div>
