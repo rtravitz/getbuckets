@@ -4,13 +4,22 @@
   bottom: 0;
   width: calc(100% - 1rem);
   margin-left: .5rem;
-  height: 2.3rem;
   z-index: 1000;
   border-radius: 20px 20px 0 0;
 }
 
+.sectionToplineSize {
+  height: 2.75rem;
+  transition: .5s;
+}
+
 .sectionFullsize {
   height: 12rem;
+  transition: .5s;
+  border-radius: 20px 20px 0 0;
+}
+.sectionExtraFullsize {
+  height: 19rem;
   transition: .5s;
   border-radius: 20px 20px 0 0;
 }

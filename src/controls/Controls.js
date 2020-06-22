@@ -3,12 +3,23 @@ import CreatingView from './views/CreatingView'
 import ShowBucketView from './views/ShowBucketView'
 import RateCleanView from './views/RateCleanView'
 import RateLockView from './views/RateLockView'
-import { CREATE, DEFAULT, SHOW, RATE_CLEAN, RATE_LOCK } from '../controlModes'
+import InfoView from './views/InfoView'
+import { CREATE, DEFAULT, SHOW, RATE_CLEAN, RATE_LOCK, INFO } from '../controlModes'
 import { InfoIcon, CirclePlusIcon } from '../Icons'
 import styles from './Controls.module.css'
 
 function Controls(props) {
-  const showFullControls = props.controlMode === DEFAULT ? '' : styles.sectionFullsize
+  let showFullControls
+  
+  if (props.controlMode === DEFAULT) {
+    showFullControls = styles.sectionToplineSize
+    
+  } else if (props.controlMode === INFO) {
+    showFullControls = styles.sectionExtraFullsize
+  } 
+  else {
+    showFullControls = styles.sectionFullsize
+  }
 
   let controlView
   switch (props.controlMode) {
@@ -47,6 +58,9 @@ function Controls(props) {
           setControlMode={props.setControlMode} />
       )
       break
+    case INFO:
+      controlView = <InfoView setControlMode={props.setControlMode} />
+      break
     default:
       controlView = null
   }
@@ -56,7 +70,8 @@ function Controls(props) {
       <div className={styles.topline}>
         <InfoIcon
           size="30"
-          className={styles.icons} />
+          className={styles.icons} 
+          onClick={() => { props.setControlMode(INFO) }} />
         <h1 className={styles.header}>GetBuckets</h1>
         <CirclePlusIcon
           size="30"
