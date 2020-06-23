@@ -22,9 +22,18 @@ function Map({ buckets, center, controlMode, refMarker, setNewBucket, setCurrent
     }
   }
 
+  const updateCreateMarker = (e) => {
+    if (controlMode !== CREATE) {
+      setMarkerCenter(e.target.getCenter())
+    }
+  }
+
   return (
     <section className="map">
-      <LeafletMap center={center} zoom={13}>
+      <LeafletMap 
+        center={center} 
+        onMoveEnd={updateCreateMarker}
+        zoom={13}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />

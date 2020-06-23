@@ -6,11 +6,25 @@ import { DEFAULT } from './controlModes'
 
 import './App.css'
 
+function getLocation() {
+  return new Promise((resolve, reject) => {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const coords = [position.coords.latitude, position.coords.longitude]
+        resolve(coords)
+      })
+    } else {
+      reject("Geo Location not supported by browser")
+    }
+  })
+}
+
 function App() {
   const [buckets, setBuckets] = useState([])
   const [newBucket, setNewBucket] = useState(null)
   const [controlMode, setControlMode] = useState(DEFAULT)
   const [currentBucketID, setCurrentBucketID] = useState(null)
+  const [userCenter, setUserCenter] = useState([47.617396, -122.310563])
   const refMarker = useRef(null)
 
   const updateBucket = (fresh) => {
@@ -25,12 +39,18 @@ function App() {
       .then((res) => { setBuckets(res.data) })
   }, [])
 
+  useEffect(() => {
+    getLocation()
+      .then((coords) => { setUserCenter(coords) })
+      .catch((err) => { console.log(err) })
+  }, [])
+
   return (
     <>
       <Map
         refMarker={refMarker}
         controlMode={controlMode}
-        center={[47.617396, -122.310563]}
+        center={userCenter}
         setNewBucket={setNewBucket}
         setControlMode={setControlMode}
         setCurrentBucketID={setCurrentBucketID}
