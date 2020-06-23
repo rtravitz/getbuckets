@@ -1,9 +1,11 @@
 {
+  "name": "GetBuckets",
   "short_name": "GetBuckets",
   "icons": [
     {
       "src": "getbuckets.svg",
-      "sizes": "72x72 96x96 128x128 192x192 256x256 512x512"
+      "sizes": "72x72 96x96 128x128 192x192 256x256 512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
