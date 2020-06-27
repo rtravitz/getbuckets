@@ -1,10 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Map as LeafletMap, Marker, TileLayer } from 'react-leaflet'
 import { CREATE, SHOW } from '../controlModes'
 import { redBucketMarker, blueBucketMarker } from './Marker'
+import axios from 'axios'
 
-function Map({ buckets, center, controlMode, refMarker, setNewBucket, setCurrentBucketID, setControlMode }) {
-  const [markerCenter, setMarkerCenter] = useState(center)
+function getLocation() {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const coords = [position.coords.latitude, position.coords.longitude]
+        resolve(coords)
+      })
+    } else {
+      reject("Geo Location not supported by browser")
+    }
+  })
+}
+
+function Map({ 
+  refMap,
+  buckets, 
+  controlMode, 
+  refMarker, 
+  setNewBucket, 
+  setBuckets,
+  setCurrentBucketID, 
+  setShowSearchAreaButton,
+  setControlMode 
+}) {
+  const [userCenter, setUserCenter] = useState([47.617396, -122.310563])
+  const [markerCenter, setMarkerCenter] = useState(userCenter)
+
+  useEffect(() => {
+    getLocation()
+      .then((coords) => { setUserCenter(coords) })
+      .catch((err) => { console.log(err) })
+  }, [])
 
   const updatePosition = () => {
     const marker = refMarker.current
@@ -23,15 +54,27 @@ function Map({ buckets, center, controlMode, refMarker, setNewBucket, setCurrent
   }
 
   const updateCreateMarker = (e) => {
+    setShowSearchAreaButton(true)
+
     if (controlMode !== CREATE) {
       setMarkerCenter(e.target.getCenter())
     }
   }
 
+  const checkBounds = (e) => {
+    const bounds = e.target.getBounds()
+    const query = `bbox=${bounds._southWest.lng},${bounds._southWest.lat},${bounds._northEast.lng},${bounds._northEast.lat}`
+    axios.get(`${process.env.REACT_APP_BACKEND}/api/v0/bucketsbox?${query}`)
+      .then((res) => { setBuckets(res.data) })
+      .catch((err) => { console.log(err) })
+  }
+
   return (
     <section className="map">
-      <LeafletMap 
-        center={center} 
+      <LeafletMap
+        ref={refMap}
+        center={userCenter} 
+        whenReady={checkBounds}
         onMoveEnd={updateCreateMarker}
         zoom={13}>
         <TileLayer
