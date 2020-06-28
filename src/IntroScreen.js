@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import Loader from './Loader'
+import React, { useEffect, useState, useCallback } from 'react'
 import redBucket from './assets/redbucket.svg'
 import styles from './IntroScreen.module.css'
 
@@ -27,11 +26,10 @@ const defaultCenter = [47.617396, -122.310563]
 
 function IntroScreen({ setStartingCenter }) {
   const [showPrompt, setShowPrompt] = useState(false)
-  const [loading, setLoading] = useState(false)
 
-  const setCoords = () => {
+  const setCoords = useCallback(() => {
     getLocation()
-      .then((coords) => { setStartingCenter(coords); setLoading(true) })
+      .then((coords) => { setStartingCenter(coords) })
       .catch((err) => {
         // User has denied location
         if (err.code === 1) {
@@ -40,12 +38,11 @@ function IntroScreen({ setStartingCenter }) {
           setStartingCenter(defaultCenter)
         }
       })
-  }
+  }, [setStartingCenter])
 
   useEffect(() => {
     getPermissionStatus()
       .then(status => {
-        console.log('status', status)
         const { state } = status
         if (state === 'prompt') {
           //noop
@@ -61,7 +58,7 @@ function IntroScreen({ setStartingCenter }) {
         console.log(err)
         setStartingCenter(defaultCenter)
       })
-  }, [])
+  }, [setCoords, setStartingCenter])
 
   useEffect(() => {
     const promptTimer = setTimeout(() => {
@@ -74,10 +71,7 @@ function IntroScreen({ setStartingCenter }) {
   return (
     <div className={styles.container}>
       {
-        loading && <Loader />
-      }
-      {
-        showPrompt && !loading &&
+        showPrompt &&
         <section className={styles.promptContainer}>
           <div className={styles.headerBox}>
             <div className={styles.headerTextSet}>
