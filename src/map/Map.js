@@ -48,7 +48,7 @@ function Map({
   const checkBounds = (e) => {
     const bounds = e.target.getBounds()
     const query = `bbox=${bounds._southWest.lng},${bounds._southWest.lat},${bounds._northEast.lng},${bounds._northEast.lat}`
-    axios.get(`${process.env.REACT_APP_BACKEND}/api/v0/bucketsbox?${query}`)
+    axios.get(`${process.env.REACT_APP_BACKEND}/api/v0/buckets?${query}`)
       .then((res) => { setBuckets(res.data) })
       .catch((err) => { console.log(err) })
   }
@@ -58,7 +58,7 @@ function Map({
       const bounds = refMap.current.leafletElement.getBounds()
       const query = `bbox=${bounds._southWest.lng},${bounds._southWest.lat},${bounds._northEast.lng},${bounds._northEast.lat}`
       setSearchAreaLoading(true)
-      axios.get(`${process.env.REACT_APP_BACKEND}/api/v0/bucketsbox?${query}`)
+      axios.get(`${process.env.REACT_APP_BACKEND}/api/v0/buckets?${query}`)
         .then((res) => {
           setBuckets(res.data)
           setShowSearchAreaButton(false)
