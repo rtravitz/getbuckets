@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Loader from './Loader'
+import Loader from '../Loader'
 import styles from './SearchAreaButton.module.css'
 
 function SearchAreaButton({ onClick, loading }) {

@@ -1,41 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { Map as LeafletMap, Marker, TileLayer } from 'react-leaflet'
-import { CREATE, SHOW } from '../controlModes'
-import { redBucketMarker, blueBucketMarker } from './Marker'
 import axios from 'axios'
 
-function getLocation() {
-  return new Promise((resolve, reject) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const coords = [position.coords.latitude, position.coords.longitude]
-        resolve(coords)
-      })
-    } else {
-      reject("Geo Location not supported by browser")
-    }
-  })
-}
+import SearchAreaButton from './SearchAreaButton'
+import { redBucketMarker, blueBucketMarker } from './Marker'
+import { CREATE, SHOW } from '../controlModes'
 
 function Map({ 
-  refMap,
   buckets, 
+  startingCenter,
   controlMode, 
   refMarker, 
   setNewBucket, 
   setBuckets,
   setCurrentBucketID, 
-  setShowSearchAreaButton,
   setControlMode 
 }) {
-  const [userCenter, setUserCenter] = useState([47.617396, -122.310563])
-  const [markerCenter, setMarkerCenter] = useState(userCenter)
-
-  useEffect(() => {
-    getLocation()
-      .then((coords) => { setUserCenter(coords) })
-      .catch((err) => { console.log(err) })
-  }, [])
+  const [markerCenter, setMarkerCenter] = useState(startingCenter)
+  const [showSearchAreaButton, setShowSearchAreaButton] = useState(false)
+  const [searchAreaLoading, setSearchAreaLoading] = useState(false)
+  const refMap = useRef(null)
 
   const updatePosition = () => {
     const marker = refMarker.current
@@ -69,11 +53,27 @@ function Map({
       .catch((err) => { console.log(err) })
   }
 
+  const searchBuckets = () => {
+    if (refMap.current) {
+      const bounds = refMap.current.leafletElement.getBounds()
+      const query = `bbox=${bounds._southWest.lng},${bounds._southWest.lat},${bounds._northEast.lng},${bounds._northEast.lat}`
+      setSearchAreaLoading(true)
+      axios.get(`${process.env.REACT_APP_BACKEND}/api/v0/bucketsbox?${query}`)
+        .then((res) => {
+          setBuckets(res.data)
+          setShowSearchAreaButton(false)
+          setSearchAreaLoading(false)
+        })
+        .catch((err) => { console.log(err) })
+    }
+  }
+
   return (
     <section className="map">
+      {showSearchAreaButton && <SearchAreaButton loading={searchAreaLoading} onClick={searchBuckets} />}
       <LeafletMap
         ref={refMap}
-        center={userCenter} 
+        center={startingCenter} 
         whenReady={checkBounds}
         onMoveEnd={updateCreateMarker}
         zoom={13}>

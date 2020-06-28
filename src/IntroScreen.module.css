@@ -1,0 +1,97 @@
+.container {
+  background-color: #00C5FF;  
+  height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.promptContainer {
+  animation: fadeIn ease 2s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerBox {
+  background-color: #00C5FF;
+  padding: 1em;
+  position: relative;
+  height: 20%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn {
+  font-size: 1em;
+  font-weight: 700;
+  margin-top: 2em;
+  border: none;
+  border-radius: 20px;
+  background-color: #00C5FF;
+  color: #EBFBFF;
+  width: 50%;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.btnBox {
+  display: flex;
+  justify-content: center;
+}
+
+.copyBox {
+  padding: 0 1em;
+  background: linear-gradient(360deg, rgba(247,250,252,1) 51%, rgba(219,246,252,1) 65%, rgba(186,241,253,1) 75%, rgba(145,234,253,1) 83%, rgba(92,226,254,1) 92%, rgba(0,197,255,1) 100%);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 4em;
+}
+
+.container p {
+  color: #606975;
+  font-size: 1.2em;
+  margin-top: 1em;
+}
+
+.header {
+  color: #EBFBFF;
+  font-size: 3em;
+  font-weight: 700;
+}
+
+.headerTextSet {
+  z-index: 3;
+  position: relative;
+}
+
+.subhead {
+  color: #EBFBFF;
+  font-size: 2em;
+}
+
+.bucketBox {
+  margin-top: 1em;
+  position: absolute;
+  right: 2em;
+  top: 0;
+  z-index: 2;
+}
+
+.bucket {
+  height: 200px;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
