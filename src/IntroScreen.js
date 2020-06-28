@@ -41,23 +41,29 @@ function IntroScreen({ setStartingCenter }) {
   }, [setStartingCenter])
 
   useEffect(() => {
-    getPermissionStatus()
-      .then(status => {
-        const { state } = status
-        if (state === 'prompt') {
-          //noop
-        } else if (state === 'granted') {
-          setCoords()
-        } else if (state === 'denied') {
+    // Safari does not support navigator.permissions, so it will just
+    // have to prompt immediately.
+    if (navigator.permissions) {
+      getPermissionStatus()
+        .then(status => {
+          const { state } = status
+          if (state === 'prompt') {
+            //noop
+          } else if (state === 'granted') {
+            setCoords()
+          } else if (state === 'denied') {
+            setStartingCenter(defaultCenter)
+          } else {
+            setStartingCenter(defaultCenter)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
           setStartingCenter(defaultCenter)
-        } else {
-          setStartingCenter(defaultCenter)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-        setStartingCenter(defaultCenter)
-      })
+        })
+    } else {
+      setCoords()
+    }
   }, [setCoords, setStartingCenter])
 
   useEffect(() => {
