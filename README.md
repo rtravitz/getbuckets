@@ -6,7 +6,7 @@ This is the frontend for [GetBuckets](https://wegetbuckets.net)—a joke with a 
 
 The UI is written in React and is meant to be used as a Progressive Web App and installed to the homescreen on a mobile device. It works in conjunction with [getbuckets-be](https://github.com/rtravitz/getbuckets-be). Users can see existing bucket locations, add new buckets, and rate the existing buckets.
 
-![mobile example of getbuckets](./mobile-example.png)
+<img src="./mobile-example.png" height="400" />
 
 ## Running
 To run the frontend you'll need Node 12+. Go ahead and `npm install` and then `npm start`. You'll also want the backend running, so head on over [to that repo](https://github.com/rtravitz/getbuckets-be).
